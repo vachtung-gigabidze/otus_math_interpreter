@@ -1,2 +1,1 @@
-A sample command-line application with an entrypoint in `bin/`, library code
-in `lib/`, and example unit test in `test/`.
+Homework for lesson 3, you need to create an interpreter of mathematical expressions
