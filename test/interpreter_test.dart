@@ -33,10 +33,10 @@ void main() {
     expect(Interpreter().calculateExpr('8 / ( 2 * 2 )'), 2);
   });
   test('calculate 0', () {
-    expect(Interpreter().calculateExpr('0'), 0);
+    expect(Interpreter().calculateExpr('0'), null);
   });
   test('calculate 10', () {
-    expect(Interpreter().calculateExpr('10'), 10);
+    expect(Interpreter().calculateExpr('10'), null);
   });
   test('calculate 123 - 23', () {
     expect(Interpreter().calculateExpr('123 - 23'), 100);
@@ -44,7 +44,20 @@ void main() {
   test('calculate 1000 * 1000', () {
     expect(Interpreter().calculateExpr('1000 * 1000'), 1000000);
   });
-  test('calculate (100)', () {
-    expect(Interpreter().calculateExpr('(100)'), 100);
+  test('calculate (((5+)))', () {
+    expect(Interpreter().calculateExpr('(((5+)))'), null);
+  });
+  test('calculate (5) * * (5)', () {
+    expect(Interpreter().calculateExpr('(5) * * (5)'), null);
+  });
+  test('calculate )42+2(', () {
+    expect(Interpreter().calculateExpr(')40+2('), null);
+  });
+
+  test('calculate (42)42(42)', () {
+    expect(Interpreter().calculateExpr('(42)42(42)'), null);
+  });
+  test('calculate (+42)42+(42+)', () {
+    expect(Interpreter().calculateExpr('(+42)42+(42+)'), null);
   });
 }
