@@ -146,18 +146,18 @@ class Validator {
   }
 
   bool _isCorrectParenth() {
-    if (_tokens.fold(<String>[], (List<String> patherList, String symbol) {
+    if (_tokens.fold(<String>[], (List<String> parenthList, String symbol) {
       if (symbol == "(") {
-        patherList.add(symbol);
+        parenthList.add(symbol);
       }
       if (symbol == ")") {
-        if (patherList.isNotEmpty) {
-          if (patherList.last == "(") {
-            patherList.removeLast();
+        if (parenthList.isNotEmpty) {
+          if (parenthList.last == "(") {
+            parenthList.removeLast();
           }
         }
       }
-      return patherList;
+      return parenthList;
     }).isNotEmpty) {
       _addError("Validate throw error. In expr has unpaired parenthesis.");
       return false;
@@ -228,7 +228,7 @@ class Validator {
   }
 
   bool isValid() {
-    bool correctly = true;
+    bool correctly;
 
     correctly = _isToShortExpr() &&
         _isCorrectParenth() &&
