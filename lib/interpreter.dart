@@ -136,8 +136,8 @@ class Validator {
     _errorMessage += '${_errorMessage.isNotEmpty ? "\n" : ""} $error';
   }
 
-  bool _isToShortExpr([int minLenght = 3]) {
-    if (_tokens.length < minLenght) {
+  bool _isToShortExpr([int minLength = 3]) {
+    if (_tokens.length < minLength) {
       _addError("Validate throw error. Math expression is too short.");
       return false;
     } else {
@@ -145,19 +145,19 @@ class Validator {
     }
   }
 
-  bool _isCorrectParenth() {
-    if (_tokens.fold(<String>[], (List<String> patherList, String symbol) {
+  bool _isCorrectParenthesis() {
+    if (_tokens.fold(<String>[], (List<String> parenthesisList, String symbol) {
       if (symbol == "(") {
-        patherList.add(symbol);
+        parenthesisList.add(symbol);
       }
       if (symbol == ")") {
-        if (patherList.isNotEmpty) {
-          if (patherList.last == "(") {
-            patherList.removeLast();
+        if (parenthesisList.isNotEmpty) {
+          if (parenthesisList.last == "(") {
+            parenthesisList.removeLast();
           }
         }
       }
-      return patherList;
+      return parenthesisList;
     }).isNotEmpty) {
       _addError("Validate throw error. In expr has unpaired parenthesis.");
       return false;
@@ -189,7 +189,7 @@ class Validator {
     return true;
   }
 
-  bool _isOnlyCorretSymbol() {
+  bool _isOnlyCorrectSymbol() {
     if (_tokens
         .where((token) => !(_isDigit(token) || "+-*/()".contains(token)))
         .isNotEmpty) {
@@ -201,7 +201,7 @@ class Validator {
     }
   }
 
-  bool _isCorretCountDigit([int minCountDigit = 2]) {
+  bool _isCorrectCountDigit([int minCountDigit = 2]) {
     if (_tokens.where((token) => _isDigit(token)).length < minCountDigit) {
       _addError("Validate throw error. Not enough numbers in math expression.");
       return false;
@@ -210,7 +210,7 @@ class Validator {
     }
   }
 
-  bool _isCorretCountOperator() {
+  bool _isCorrectCountOperator() {
     int minCountOperator = _tokens.where((token) => _isDigit(token)).length - 1;
 
     if (_tokens.where((token) => "+-*/".contains(token)).length <
@@ -231,12 +231,12 @@ class Validator {
     bool correctly = true;
 
     correctly = _isToShortExpr() &&
-        _isCorrectParenth() &&
+        _isCorrectParenthesis() &&
         _isNotOperationOnBeginOrEnd() &&
         _isPairOperator() &&
-        _isOnlyCorretSymbol() &&
-        _isCorretCountDigit() &&
-        _isCorretCountOperator();
+        _isOnlyCorrectSymbol() &&
+        _isCorrectCountDigit() &&
+        _isCorrectCountOperator();
 
     return correctly;
   }
