@@ -60,4 +60,13 @@ void main() {
   test('calculate (+42)42+(42+)', () {
     expect(Interpreter().calculateExpr('(+42)42+(42+)'), null);
   });
+  test('calculate (a+b)+5+6', () {
+    expect(Interpreter().calculateExpr('(a+b)+5+6'), null);
+  });
+  test('calculate null', () {
+    expect(Interpreter().calculateExpr(''), null);
+  });
+  test('calculate )+(', () {
+    expect(Interpreter().calculateExpr(')+('), null);
+  });
 }
