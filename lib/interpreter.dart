@@ -145,7 +145,6 @@ class Validator {
     }
   }
 
-<<<<<<< HEAD
   bool _isCorrectParenthesis() {
     if (_tokens.fold(<String>[], (List<String> parenthesisList, String symbol) {
       if (symbol == "(") {
@@ -159,21 +158,6 @@ class Validator {
         }
       }
       return parenthesisList;
-=======
-  bool _isCorrectParenth() {
-    if (_tokens.fold(<String>[], (List<String> parenthList, String symbol) {
-      if (symbol == "(") {
-        parenthList.add(symbol);
-      }
-      if (symbol == ")") {
-        if (parenthList.isNotEmpty) {
-          if (parenthList.last == "(") {
-            parenthList.removeLast();
-          }
-        }
-      }
-      return parenthList;
->>>>>>> 45d2ae833983804cff1558944009c3bf40deced2
     }).isNotEmpty) {
       _addError("Validate throw error. In expr has unpaired parenthesis.");
       return false;
